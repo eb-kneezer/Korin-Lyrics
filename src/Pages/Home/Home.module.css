@@ -1,0 +1,86 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.hero {
+  height: 80vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)),
+    url("../../assets/heroSmall.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  /* opacity: 0.5; */
+}
+
+.container {
+  height: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 95%;
+  display: flex;
+}
+
+.heroImg {
+  width: 100%;
+}
+
+.heroCta {
+  width: 50%;
+  margin-left: auto;
+  padding: 100px 100px 0 0;
+  display: flex;
+  text-align: right;
+  flex-direction: column;
+  /* justify-content: center; */
+}
+
+.heroCta h1 {
+  font-size: 64px;
+  color: beige;
+}
+input[type="search"] {
+  padding: 4px;
+  height: 40px;
+  width: 280px;
+}
+
+button {
+  height: 38px;
+  background: #e8491d;
+  border: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #ffffff;
+}
+
+.popGroup {
+  background-color: inherit;
+  margin-top: 30px;
+}
+
+.popHeader {
+  padding-top: 15px;
+}
+.popHeader h2 {
+  text-align: left;
+  padding-left: 15px;
+  padding-bottom: 20px;
+}
+
+.popitems {
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.popartists {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
