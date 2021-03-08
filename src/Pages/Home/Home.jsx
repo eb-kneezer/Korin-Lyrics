@@ -101,7 +101,6 @@ export default function Home() {
     }
     return formatted.slice(0, 9);
   }
-
   // let list = []
   // for (let item in topTen) {
   //   list.push(<SingleMusic key={topTen[item].rank} title={topTen[item].title} artist={topTen[item].artist}/>) 
@@ -127,11 +126,13 @@ export default function Home() {
             <div className={styles.popHeader}>
               <h2>Popular songs in the US</h2>
             </div>
-            <div className={styles.popitems}>
-              <Loading />
-              {/* {homePopularUS.map(item => (
-                <SingleMusic key={item.key} title={item.title} artist={item.subtitle} image={item.image} artistID={item.artistId} />
-              ))} */}
+            <div className={styles.popitems}>{
+              homePopularUS.length > 0 ?
+                homePopularUS.map(item => (
+                  <SingleMusic key={item.key} title={item.title} artist={item.subtitle} image={item.image} artistID={item.artistId} />
+                )) :
+                <Loading type="song" />
+            }
             </div>
           </div>
         </div>
@@ -144,9 +145,13 @@ export default function Home() {
               <h2>Popular songs in the UK</h2>
             </div>
             <div className={styles.popitems}>
-              {homePopularUK.map(item => (
-                <SingleMusic key={item.key} title={item.title} artist={item.subtitle} image={item.image} artistID={item.artistId} />
-              ))}
+              {
+                homePopularUK.length > 0 ?
+                  homePopularUK.map(item => (
+                    <SingleMusic key={item.key} title={item.title} artist={item.subtitle} image={item.image} artistID={item.artistId} />
+                  )) :
+                  <Loading type="song" />
+              }
             </div>
           </div>
         </div>
@@ -159,9 +164,12 @@ export default function Home() {
               <h2>Popular artists</h2>
             </div>
             <div className={styles.popartists}>
-              {homePopularArtists.map(item => (
-                <SingleArtist key={item.key} artist={item.artist} />
-              ))}
+              {homePopularArtists.length > 0 ?
+                homePopularArtists.map(item => (
+                  <SingleArtist key={item.key} artist={item.artist} />
+                )) :
+                <Loading type="artalb" />
+              }
             </div>
           </div>
         </div>
@@ -174,9 +182,12 @@ export default function Home() {
               <h2>Popular albums</h2>
             </div>
             <div className={styles.popartists}>
-              {homePopularAlbums.map(item => (
-                <SingleAlbum key={item.key} title={item.album} artist={item.artist} />
-              ))}
+              {homePopularAlbums > 0 ?
+                homePopularAlbums.map(item => (
+                  <SingleAlbum key={item.key} title={item.album} artist={item.artist} />
+                )) :
+                <Loading type="artalb" />
+              }
             </div>
           </div>
         </div>
