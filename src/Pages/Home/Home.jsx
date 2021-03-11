@@ -7,6 +7,7 @@ import { MusicContext } from '../../context'
 import styles from './Home.module.css'
 import apikey from '../../key'
 import Loading from '../../Components/Loading/Loading'
+import Search from '../../Components/Search/Search'
 
 export default function Home() {
   const { query, popularUK, popularUS, popularArtists, popularAlbums } = useContext(MusicContext);
@@ -107,18 +108,18 @@ export default function Home() {
   // }
   return (
     <div>
+
       <section className={styles.hero}>
         <div className={styles.container}>
           <div className={styles.heroCta}>
             <h1><span>Korin</span> along with your faves</h1>
             <h3>discover new songs</h3>
-            <form>
-              <input type="search" placeholder="search lyrics by song title or artist name" />
-              <button>go</button>
-            </form>
+            <Search />
           </div>
         </div>
       </section>
+
+
 
       <section className={styles.popmusic}>
         <div className={styles.container}>
@@ -194,5 +195,8 @@ export default function Home() {
       </section>
 
 
-    </div>)
+
+
+    </div>
+  )
 }
