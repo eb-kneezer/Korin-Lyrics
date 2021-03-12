@@ -1,21 +1,19 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import SingleAlbum from '../../Components/SingleAlbum/SingleAlbum'
 import SingleArtist from '../../Components/SingleArtist/SingleArtist'
 import SingleMusic from '../../Components/SingleMusic/SingleMusic'
 import { MusicContext } from '../../context'
-
-import styles from './Home.module.css'
 import apikey from '../../key'
+import styles from './Home.module.css'
 import Loading from '../../Components/Loading/Loading'
 import Search from '../../Components/Search/Search'
 
 export default function Home() {
-  const { query, popularUK, popularUS, popularArtists, popularAlbums } = useContext(MusicContext);
+  const { popularUK, popularUS, popularArtists, popularAlbums } = useContext(MusicContext);
   const [homePopularUK, setHomePopularUK] = popularUK;
   const [homePopularUS, setHomePopularUS] = popularUS;
   const [homePopularArtists, setHomePopularArtists] = popularArtists;
   const [homePopularAlbums, setHomePopularAlbums] = popularAlbums;
-  const [inputQuery, setInputQuery] = query;
 
 
   useEffect(() => {
@@ -68,7 +66,7 @@ export default function Home() {
     }
 
 
-    // getSongsUS()
+    getSongsUS()
     // getSongsUK()
     // getBillboardArtists()
     // getBillboardAlbums()
@@ -130,7 +128,13 @@ export default function Home() {
             <div className={styles.popitems}>{
               homePopularUS.length > 0 ?
                 homePopularUS.map(item => (
-                  <SingleMusic key={item.key} title={item.title} artist={item.subtitle} image={item.image} artistID={item.artistId} />
+                  <SingleMusic
+                    key={item.key}
+                    songID={item.key}
+                    title={item.title}
+                    artist={item.subtitle}
+                    image={item.image}
+                    artistID={item.artistId} />
                 )) :
                 <Loading type="song" />
             }

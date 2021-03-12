@@ -1,9 +1,11 @@
 import React from 'react'
-
+import { useParams } from 'react-router-dom'
 import styles from './Song.module.css'
 import Loading from '../../Components/Loading/Loading'
 
 export default function Song() {
+  const { musicID } = useParams()
+  console.log(musicID)
   return (
     <div className={styles.container}>
 
