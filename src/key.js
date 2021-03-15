@@ -1,3 +1,3 @@
-const key = 'abcd'
+const key = 'fghgh'
 
 export default key

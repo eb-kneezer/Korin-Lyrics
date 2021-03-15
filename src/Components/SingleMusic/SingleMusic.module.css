@@ -21,3 +21,12 @@ img {
   text-align: left;
   padding: 7px;
 }
+
+.musicinfo .title {
+  font-weight: 500;
+}
+
+.singleLink {
+  text-decoration: none;
+  color: inherit;
+}

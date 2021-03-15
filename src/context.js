@@ -3,7 +3,7 @@ import apikey from './key'
 
 export const MusicContext = createContext(null);
 
-export const MusicContextProvider = (props) => {
+export const MusicContextProvider = ({ children }) => {
 
 
   // -------------SET STATE-------------
@@ -13,8 +13,8 @@ export const MusicContextProvider = (props) => {
   const [homePopularArtists, setHomePopularArtists] = useState([])
   const [homePopularAlbums, setHomePopularAlbums] = useState([])
   const [searchResult, setSearchResult] = useState([])
-  const [music, setMusic] = useState({})
-  const [artist, setArtist] = useState({})
+  const [music, setMusic] = useState(null)
+  const [artist, setArtist] = useState(null)
   const [query, setQuery] = useState('');
 
 
@@ -47,6 +47,25 @@ export const MusicContextProvider = (props) => {
       }
     })
     const data = await response.json()
+    console.log(data)
+    const formattedData = {
+      key: data.key,
+      title: data.title,
+      artist: data.subtitle,
+      coverImg: data.images.coverarthq,
+      backgroundImg: data.images.background,
+      shazam: data.url,
+      artistID: data.artists[0].id,
+      genre: data.genres.primary,
+      album: data.sections[0].metadata[0].text,
+      label: data.sections[0].metadata[1].text,
+      released: data.sections[0].metadata[2].text,
+      lyrics: data.sections[1].text.join("\n"),
+      footer: data.sections[1].footer,
+      youtubeCaption: data.sections[2].youtubeurl.caption,
+      youtubeURL: data.sections[2].youtubeurl.actions[0].uri
+    };
+    setMusic(formattedData)
     //  format returned data
     // set formatted data to setMusic
     // setMusic()
@@ -78,7 +97,7 @@ export const MusicContextProvider = (props) => {
       popularUK: [homePopularUK, setHomePopularUK],
       popularArtists: [homePopularArtists, setHomePopularArtists],
       popularAlbums: [homePopularAlbums, setHomePopularAlbums],
-      music: [music, setMusic],
+      song: [music, setMusic],
       artist: [artist, setArtist],
       result: [searchResult, setSearchResult],
       query: [query, setQuery],
@@ -87,7 +106,7 @@ export const MusicContextProvider = (props) => {
       getArtist,
       // getAlbum
     }}>
-      {props.children}
+      {children}
     </MusicContext.Provider>
   )
 }

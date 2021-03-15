@@ -22,12 +22,12 @@
 }
 
 .songCover {
-  background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,1)), url("../../assets/hero.jpeg");
+  /* background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,1)), url("../../assets/hero.jpeg"); */
   
   background-size: cover;
   background-position: center top;
-  width: 100%;
-  height: 70%;
+  /* width: 100%;
+  height: 70%; */
 }
 .songTitle {
   margin-top: 70%;
@@ -42,7 +42,7 @@
 .songDetails {
   background-color: rgb(15, 15, 15);
   width: 100%;
-  height: 30%;
+  height: auto;
   padding: 15px;
   font-size: 18px;
   line-height: 35px;
@@ -52,6 +52,29 @@ strong {
 }
 .songDetails p {
   margin: auto 0;
+}
+
+.songDetailsLoading {
+  display: inline-block;
+  height: 10px;
+  width: 180px;
+  border-radius: 5px;
+  margin-left: 10px;
+  background-color: rgb(24, 24, 24);
+  animation: blinker 2s ease-in infinite;
+}
+.songTitleLoading {
+  display: inline-block;
+  height: 30px;
+  width: 230px;
+  border-radius: 5px;
+  background-color: rgb(24, 24, 24);
+  animation: blinker 2s ease-in infinite;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0.8;
+  }
 }
 
 .songLyrics {
@@ -71,6 +94,7 @@ strong {
 .lyricsBody {
   width: 100%;
   height: 88%;
+  white-space: pre-wrap;
   overflow-y: scroll;
 
 }
@@ -79,12 +103,12 @@ strong {
   width: 60%;
   height: auto;
   margin: 0 auto;
-  line-height: 40px;
+  line-height: 35px;
   text-align: center;
 }
 .lyricsFooter {
   color: rgb(168, 2, 2);
-  width: 100%;
+  width: 90%;
   height: 50px;
   text-align: center;
 }

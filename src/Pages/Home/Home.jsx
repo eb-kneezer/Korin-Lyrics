@@ -66,7 +66,7 @@ export default function Home() {
     }
 
 
-    getSongsUS()
+    // getSongsUS()
     // getSongsUK()
     // getBillboardArtists()
     // getBillboardAlbums()
@@ -89,14 +89,21 @@ export default function Home() {
   const formatBillboardArtist = (data) => {
     let formatted = []
     for (let item in data) {
-      formatted.push({ 'artist': data[item].artist, 'key': data[item].rank })
+      formatted.push({
+        'artist': data[item].artist,
+        'key': data[item].rank
+      })
     }
     return formatted.slice(0, 9);
   }
   const formatBillboardAlbum = (data) => {
     let formatted = []
     for (let item in data) {
-      formatted.push({ 'album': data[item].album, 'artist': data[item].artist, 'key': data[item].rank })
+      formatted.push({
+        'album': data[item].album,
+        'artist': data[item].artist,
+        'key': data[item].rank
+      })
     }
     return formatted.slice(0, 9);
   }

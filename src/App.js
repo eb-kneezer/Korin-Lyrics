@@ -14,15 +14,6 @@ import Search from './Components/Search/Search';
 
 function App() {
 
-  // const [homePopularUS, setHomePopularUS] = useState([])
-  // const [homePopularUK, setHomePopularUK] = useState([])
-  // const [homePopularArtists, setHomePopularArtists] = useState([])
-  // const [homePopularAlbums, setHomePopularAlbums] = useState([])
-  // const [music, setMusic] = useState({})
-  // const [artist, setArtist] = useState({})
-  // const [query, setQuery] = useState('');
-
-
   return (
     <div className="App">
       <NavHeader />

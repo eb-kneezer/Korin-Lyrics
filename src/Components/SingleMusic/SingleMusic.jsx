@@ -7,11 +7,11 @@ import img from '../../assets/hero.jpeg'
 export default function SingleMusic({ title, artist, image, songID, artistID }) {
   return (
     <div className={styles.singleMusic}>
-      <Link to={`/song/${songID}`} >
-        <img src={image || img} alt="music" />
+      <Link className={styles.singleLink} to={`/song/${songID}`} >
+        <img src={image} alt="music" />
         <div className={styles.musicInfo}>
-          <h3>{title || 'title'}</h3>
-          <p id={artistID}>{artist || 'artist'}</p>
+          <p className={styles.title}>{title}</p>
+          <p id={artistID}>{artist}</p>
         </div>
       </Link>
     </div>
