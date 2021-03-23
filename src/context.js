@@ -1,5 +1,17 @@
-import React, { createContext, useState } from 'react'
-import apikey from './key'
+import React, { createContext, useState, useEffect } from 'react'
+import axios from 'axios'
+
+import {
+  shazamBaseUrl,
+  billboardBaseUrl,
+  formatSingleMusic,
+  formatDataShazam, 
+  formatBillboardAlbum, 
+  formatBillboardArtist, 
+  constOptions1,
+  constOptions2,
+} from './utilities'
+
 
 export const MusicContext = createContext(null);
 
@@ -18,74 +30,167 @@ export const MusicContextProvider = ({ children }) => {
   const [query, setQuery] = useState('');
 
 
+
+  // ---------------UseEffect for DATA NEEDED ON START ----------
+  
+  useEffect(() => {
+
+    const getSongsUS = async () => {
+      const options = {
+        ...constOptions1,
+        url: `${shazamBaseUrl}charts/track`,
+        params: {
+          locale: 'en-US',
+          listId: 'ip-country-chart-US',
+          pageSize: '14',
+          startFrom: '0'
+        }
+      }
+
+      const response = await axios.request(options)
+      try {
+        const returned = await response.data
+        setHomePopularUS(formatDataShazam(returned.tracks))
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    
+    const getSongsUK = async () => {
+      const options = {
+        ...constOptions1,
+        url: `${shazamBaseUrl}charts/track`,
+        params: {
+          locale: 'en-US',
+          listId: 'ip-country-chart-GB',
+          pageSize: '14',
+          startFrom: '0'
+        }
+      }
+
+      const response = await axios.request(options)
+      try {
+        const returned = await response.data
+        setHomePopularUK(formatDataShazam(returned.tracks))
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+
+    const getBillboardArtists = async () => {
+      const options = {
+        ...constOptions2,
+        url: `${billboardBaseUrl}artist-100`,
+        params: {
+          date: '2021-03-20',
+          range: '1-9'
+        }
+      }
+
+      const response = await axios.request(options)
+      try {
+        const returned = await response.data
+        setHomePopularArtists(formatBillboardArtist(returned.content))
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    const getBillboardAlbums = async () => {
+      const options = {
+        ...constOptions2,
+        url: `${billboardBaseUrl}billboard-200`,
+        params: {
+          date: '2021-03-20',
+          range: '1-9'
+        }
+      }
+
+      const response = await axios.request(options)
+      try {
+        const returned = await response.data
+        setHomePopularAlbums(formatBillboardAlbum(returned.content))
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    getSongsUS()
+    getSongsUK()
+    // getBillboardArtists()
+    // getBillboardAlbums()
+
+  }, [])
+
+
+
+
   // ------------SEARCH QUERY FUNCTION -------------
 
   const getQuery = async (query) => {
-    const response = await fetch(`https://shazam.p.rapidapi.com/search?term=${query}&locale=en-US&offset=0&limit=5`, {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-key": apikey,
-        "x-rapidapi-host": "shazam.p.rapidapi.com"
+    const options = {
+      ...constOptions1, 
+      url: `${shazamBaseUrl}search`,
+      params: {
+        term: query,
+        locale: 'en-US',
+        offset: '0',
+        limit: '5'
       }
-    })
-    const data = await response.json()
-    // format return data
+    }
 
-    // set formatted data as search result
-    // setSearchResult()
+    const response = await axios.request(options)
+    try {
+      const returned = await response.data
+      console.log(returned)
+    } catch(err) {
+      console.log(err)
+    }
   }
 
 
   // ------------GET SINGLE MUSIC DETAILS--------------- 
 
   const getMusic = async (musicID) => {
-    const response = await fetch(`https://shazam.p.rapidapi.com/songs/get-details?key=${musicID}&locale=en-US`, {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-key": apikey,
-        "x-rapidapi-host": "shazam.p.rapidapi.com"
+    const options = {
+      ...constOptions1,
+      url: `${shazamBaseUrl}songs/get-details`,
+      params: {
+        key: musicID,
+        locale: 'en-US'
       }
-    })
-    const data = await response.json()
-    console.log(data)
-    const formattedData = {
-      key: data.key,
-      title: data.title,
-      artist: data.subtitle,
-      coverImg: data.images.coverarthq,
-      backgroundImg: data.images.background,
-      shazam: data.url,
-      artistID: data.artists[0].id,
-      genre: data.genres.primary,
-      album: data.sections[0].metadata[0].text,
-      label: data.sections[0].metadata[1].text,
-      released: data.sections[0].metadata[2].text,
-      lyrics: data.sections[1].text.join("\n"),
-      footer: data.sections[1].footer,
-      youtubeCaption: data.sections[2].youtubeurl.caption,
-      youtubeURL: data.sections[2].youtubeurl.actions[0].uri
-    };
-    setMusic(formattedData)
-    //  format returned data
-    // set formatted data to setMusic
-    // setMusic()
-  }
+    }
 
+    const response = await axios.request(options)
+    try {
+      const returned = await response.data
+      setMusic(formatSingleMusic(returned))
+
+    } catch(err) {
+      console.log(err)
+    }
+  }
 
   // --------------GET SINGLE ARTIST DETAILS--------------
 
   const getArtist = async (artistID) => {
-    const response = await fetch(`https://shazam.p.rapidapi.com/songs/list-artist-top-tracks?id=${artistID}&locale=en-US`, {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-key": apikey,
-        "x-rapidapi-host": "shazam.p.rapidapi.com"
+    const options = {
+      ...constOptions1,
+      url: `${shazamBaseUrl}songs/list-artist-top-tracks`,
+      params: {
+        id: artistID,
+        locale: 'en-US'
       }
-    })
-    const data = await response.json()
-    // format returned data
-    // set formatted data to setArtist
-    // setArtist()
+    }
+
+    const response = await axios.request(options)
+    try{
+      const returned = await response.data
+      console.log(returned)
+    } catch(err) {
+      console.log(err)
+    }
   }
   // const getAlbum = (albumID) => {
 
@@ -93,10 +198,10 @@ export const MusicContextProvider = ({ children }) => {
 
   return (
     <MusicContext.Provider value={{
-      popularUS: [homePopularUS, setHomePopularUS],
-      popularUK: [homePopularUK, setHomePopularUK],
-      popularArtists: [homePopularArtists, setHomePopularArtists],
-      popularAlbums: [homePopularAlbums, setHomePopularAlbums],
+      popularUS: [homePopularUS],
+      popularUK: [homePopularUK],
+      popularArtists: [homePopularArtists],
+      popularAlbums: [homePopularAlbums],
       song: [music, setMusic],
       artist: [artist, setArtist],
       result: [searchResult, setSearchResult],

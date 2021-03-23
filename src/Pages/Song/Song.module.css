@@ -21,14 +21,14 @@
   flex: 2;
 }
 
-.songCover {
-  /* background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,1)), url("../../assets/hero.jpeg"); */
+/* .songCover {
+  background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,1)), url("../../assets/hero.jpeg");
   
   background-size: cover;
   background-position: center top;
-  /* width: 100%;
-  height: 70%; */
-}
+  width: 100%;
+  height: 70%;
+} */
 .songTitle {
   margin-top: 70%;
   margin-left: 20px;

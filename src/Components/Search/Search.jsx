@@ -7,7 +7,7 @@ export default function Search() {
 
     <div className={styles.mainContainer}>
       <input className={styles.searchInput} placeholder="what are you looking for?" type="search" id="search" />
-      <a className={styles.searchButton} href="#">go</a>
+      <a className={styles.searchButton} >go</a>
     </div>
   )
 }

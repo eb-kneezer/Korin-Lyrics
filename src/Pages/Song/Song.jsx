@@ -11,25 +11,26 @@ export default function Song() {
   const { popularUS, popularUK, song, getMusic } = useContext(MusicContext)
   const [homePopularUS] = popularUS
   const [homePopularUK] = popularUK
-  const [music] = song
+  const [music, setMusic] = song
 
 
   const { musicID } = useParams()
 
   useEffect(() => {
-    // getMusic(musicID)
+    setMusic(null)
+      getMusic(musicID)
   }, [musicID])
   // console.log(music.coverImg)
-  console.log(music)
+  // console.log(music)
   return (
     <div className={styles.container}>
 
       <section className={styles.songInfo}>
         <div
           style={{
-            background: `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,1)), url(${music ? music.coverImg : img}) `,
-            // backgroundSize: 'cover',
-            // backgroundPosition: 'center top',
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.8)), url(${music ? music.coverImg : img}) `,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
             width: '100%',
             height: '70%'
           }}
