@@ -8,6 +8,8 @@ import styles from './Home.module.css'
 import Loading from '../../Components/Loading/Loading'
 import Search from '../../Components/Search/Search'
 
+
+
 export default function Home() {
   const { popularUK, popularUS, popularArtists, popularAlbums } = useContext(MusicContext);
   const [homePopularUK] = popularUK;

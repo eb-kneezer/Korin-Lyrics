@@ -118,8 +118,8 @@ export const MusicContextProvider = ({ children }) => {
 
     getSongsUS()
     getSongsUK()
-    // getBillboardArtists()
-    // getBillboardAlbums()
+    getBillboardArtists()
+    getBillboardAlbums()
 
   }, [])
 
