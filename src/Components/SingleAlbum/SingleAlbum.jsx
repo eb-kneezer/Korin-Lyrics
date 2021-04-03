@@ -8,7 +8,7 @@ export default function SingleAlbum({artist, title}) {
     <div className={styles.singleAlbum}>
       <img className={styles.albumImg} src={img} alt="album"/>
       <div className={styles.albumInfo}>
-        <h3>{title}</h3>
+        <h4>{title}</h4>
         <p>{artist}</p>
       </div>
     </div>

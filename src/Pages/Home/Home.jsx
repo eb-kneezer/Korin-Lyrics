@@ -39,7 +39,8 @@ export default function Home() {
             <div className={styles.popHeader}>
               <h2>Popular songs in the US</h2>
             </div>
-            <div className={styles.popitems}>{
+            <div className={styles.popitems}>
+            {
               homePopularUS.length > 0 ?
                 homePopularUS.map(item => (
                   <SingleMusic

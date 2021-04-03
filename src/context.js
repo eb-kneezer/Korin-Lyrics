@@ -116,10 +116,10 @@ export const MusicContextProvider = ({ children }) => {
       }
     }
 
-    getSongsUS()
-    getSongsUK()
-    getBillboardArtists()
-    getBillboardAlbums()
+    // getSongsUS()
+    // getSongsUK()
+    // getBillboardArtists()
+    // getBillboardAlbums()
 
   }, [])
 
@@ -205,7 +205,7 @@ export const MusicContextProvider = ({ children }) => {
       song: [music, setMusic],
       artist: [artist, setArtist],
       result: [searchResult, setSearchResult],
-      query: [query, setQuery],
+      search: [query, setQuery],
       getQuery,
       getMusic,
       getArtist,
