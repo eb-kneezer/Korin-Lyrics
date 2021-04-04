@@ -75,13 +75,45 @@ const formatBillboardAlbum = (data) => {
   return formatted;
 }
 
+const formatSearchResult = (result) => {
+  
+let formattedSongs = []
+let formattedArtist = []
+
+result.tracks.hits.forEach(item => {
+ formattedSongs.push({
+   key: item.track.key,
+   title: item.track.title,
+   subtitle: item.track.subtitle,
+   image: item.track.images.coverart,
+  //  artistId: item.track.artists[0].id !== undefined ? item.track.artists[0].id: '0'
+
+ })
+})
+
+result.artists.hits.forEach(item => {
+ formattedArtist.push({
+   avatar: item.artist.avatar,
+   name: item.artist.name,
+   id: item.artist.id,
+
+ })
+})
+
+return {
+  songResult: formattedSongs,
+  artistResult: formattedArtist
+}
+}
+
 export {
   shazamBaseUrl, 
   billboardBaseUrl, 
   formatSingleMusic, 
   formatDataShazam, 
   formatBillboardAlbum, 
-  formatBillboardArtist, 
+  formatBillboardArtist,
+  formatSearchResult,
   constOptions1,
   constOptions2 
 }

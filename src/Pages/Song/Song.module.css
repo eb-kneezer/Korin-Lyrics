@@ -30,8 +30,7 @@
   height: 70%;
 } */
 .songTitle {
-  margin-top: 70%;
-  margin-left: 20px;
+  margin: 0 0 20px 20px;
 } 
 .songTitle h1 {
   font-size: 40px;

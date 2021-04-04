@@ -4,7 +4,8 @@
   padding: 0;
 }
 
-.singleArtist {
+.singleArtist,
+.singleLink {
   height: 70px;
   width: 310px;
   border-radius: 7px;
@@ -31,4 +32,9 @@
 
 .singleArtist h4 {
   margin-left: 20px;
+}
+
+.singleLink {
+  text-decoration: none;
+  color: inherit;
 }

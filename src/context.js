@@ -6,6 +6,7 @@ import {
   billboardBaseUrl,
   formatSingleMusic,
   formatDataShazam, 
+  formatSearchResult,
   formatBillboardAlbum, 
   formatBillboardArtist, 
   constOptions1,
@@ -24,7 +25,7 @@ export const MusicContextProvider = ({ children }) => {
   const [homePopularUK, setHomePopularUK] = useState([])
   const [homePopularArtists, setHomePopularArtists] = useState([])
   const [homePopularAlbums, setHomePopularAlbums] = useState([])
-  const [searchResult, setSearchResult] = useState([])
+  const [searchResult, setSearchResult] = useState(null)
   const [music, setMusic] = useState(null)
   const [artist, setArtist] = useState(null)
   const [query, setQuery] = useState('');
@@ -143,7 +144,8 @@ export const MusicContextProvider = ({ children }) => {
     const response = await axios.request(options)
     try {
       const returned = await response.data
-      console.log(returned)
+      setSearchResult(formatSearchResult(returned))
+      // console.log(searchResult)
     } catch(err) {
       console.log(err)
     }

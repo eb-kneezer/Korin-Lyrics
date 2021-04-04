@@ -1,4 +1,5 @@
 import React, {useContext} from 'react'
+import {useHistory} from 'react-router-dom'
 
 import {MusicContext} from '../../context'
 
@@ -6,17 +7,19 @@ import styles from './Search.module.css'
 
 export default function Search() {
 
+  const history = useHistory()
 
   const {search} = useContext(MusicContext)
   const [query, setQuery] = search
 
   const handleChange = (event) => {
-    console.log(event.target.value)
+    setQuery(event.target.value)
   }
 
   const handleKeyPress = (event) => {
     if (event.charCode === 13) {
-      setQuery(event.target.value)
+      // getQuery(query)
+      history.push(`/search/${query}`)
       event.target.value = ""
 
     }
@@ -32,7 +35,9 @@ export default function Search() {
       placeholder="what are you looking for?"
       type="search" 
       id="search" />
-      <a className={styles.searchButton} >go</a>
+      <button 
+      onClick={() => history.push(`/search/${query}`)}
+      className={styles.searchButton}>go</button>
     </div>
   )
 }

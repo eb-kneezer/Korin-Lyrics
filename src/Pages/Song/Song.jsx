@@ -32,7 +32,10 @@ export default function Song() {
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             width: '100%',
-            height: '70%'
+            height: '70%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end'
           }}
           className={styles.songCover}>
           <div className={styles.songTitle}>
