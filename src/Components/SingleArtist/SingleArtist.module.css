@@ -4,8 +4,7 @@
   padding: 0;
 }
 
-.singleArtist,
-.singleLink {
+.singleArtist {
   height: 70px;
   width: 310px;
   border-radius: 7px;

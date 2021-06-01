@@ -9,6 +9,7 @@ export default function SingleMusic({ title, artist, image, songID, artistID }) 
     <div className={styles.singleMusic}>
       <Link className={styles.singleLink} to={`/song/${songID}`} >
         <img src={image} alt="music" />
+        {/* <p className="hover">Korin</p> */}
         <div className={styles.musicInfo}>
           <p className={styles.title}>{title}</p>
           <p id={artistID}>{artist}</p>

@@ -21,7 +21,7 @@ export default function SearchResult() {
 useEffect(() => {
 
   setSearchResult(null)
-  // getQuery(queryID)
+  getQuery(queryID)//eslint-disable-next-line react-hooks/exhaustive-deps
 }, [queryID])
 
 

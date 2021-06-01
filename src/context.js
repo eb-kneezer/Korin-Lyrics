@@ -21,6 +21,7 @@ export const MusicContextProvider = ({ children }) => {
 
   // -------------SET STATE-------------
 
+  const [afroBeats, setAfroBeats] = useState([])
   const [homePopularUS, setHomePopularUS] = useState([])
   const [homePopularUK, setHomePopularUK] = useState([])
   const [homePopularArtists, setHomePopularArtists] = useState([])
@@ -35,6 +36,29 @@ export const MusicContextProvider = ({ children }) => {
   // ---------------UseEffect for DATA NEEDED ON START ----------
   
   useEffect(() => {
+
+    const getAfroBeats = async () => {
+      const options = {
+        ...constOptions1,
+        url: `${shazamBaseUrl}charts/track`,
+        params: {
+          locale: 'en-US',
+          listId: 'genre-global-chart-11',
+          pageSize: '14',
+          startFrom: '0'
+        }
+      }
+
+      const response = await axios.request(options)
+      try {
+        const returned = await response.data;
+        setAfroBeats(formatDataShazam(returned.tracks))
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    
 
     const getSongsUS = async () => {
       const options = {
@@ -84,7 +108,7 @@ export const MusicContextProvider = ({ children }) => {
         ...constOptions2,
         url: `${billboardBaseUrl}artist-100`,
         params: {
-          date: '2021-03-20',
+          date: '2021-05-20',
           range: '1-9'
         }
       }
@@ -103,7 +127,7 @@ export const MusicContextProvider = ({ children }) => {
         ...constOptions2,
         url: `${billboardBaseUrl}billboard-200`,
         params: {
-          date: '2021-03-20',
+          date: '2021-05-20',
           range: '1-9'
         }
       }
@@ -117,10 +141,11 @@ export const MusicContextProvider = ({ children }) => {
       }
     }
 
-    // getSongsUS()
-    // getSongsUK()
-    // getBillboardArtists()
-    // getBillboardAlbums()
+    getAfroBeats()
+    getSongsUS()
+    getSongsUK()
+    getBillboardArtists()
+    getBillboardAlbums()
 
   }, [])
 
@@ -200,6 +225,7 @@ export const MusicContextProvider = ({ children }) => {
 
   return (
     <MusicContext.Provider value={{
+      afro: [afroBeats],
       popularUS: [homePopularUS],
       popularUK: [homePopularUK],
       popularArtists: [homePopularArtists],

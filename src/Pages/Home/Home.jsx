@@ -11,7 +11,8 @@ import Search from '../../Components/Search/Search'
 
 
 export default function Home() {
-  const { popularUK, popularUS, popularArtists, popularAlbums } = useContext(MusicContext);
+  const { afro, popularUK, popularUS, popularArtists, popularAlbums } = useContext(MusicContext);
+  const [afroBeats] = afro;
   const [homePopularUK] = popularUK;
   const [homePopularUS] = popularUS;
   const [homePopularArtists] = popularArtists;
@@ -33,11 +34,39 @@ export default function Home() {
 
 
 
+
       <section className={styles.popmusic}>
         <div className={styles.container}>
           <div className={styles.popGroup}>
             <div className={styles.popHeader}>
-              <h2>Popular songs in the US</h2>
+              <h2>AfroBeats</h2>
+            </div>
+            <div className={styles.popitems}>
+            {
+              afroBeats.length > 0 ?
+                afroBeats.map(item => (
+                  <SingleMusic
+                    key={item.key}
+                    songID={item.key}
+                    title={item.title}
+                    artist={item.subtitle}
+                    image={item.image}
+                    artistID={item.artistId} />
+                )) :
+                <Loading type="song" />
+            }
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <section className={styles.popmusic}>
+        <div className={styles.container}>
+          <div className={styles.popGroup}>
+            <div className={styles.popHeader}>
+              <h2>Popular in the US</h2>
             </div>
             <div className={styles.popitems}>
             {
@@ -62,7 +91,7 @@ export default function Home() {
         <div className={styles.container}>
           <div className={styles.popGroup}>
             <div className={styles.popHeader}>
-              <h2>Popular songs in the UK</h2>
+              <h2>Popular in the UK</h2>
             </div>
             <div className={styles.popitems}>
               {

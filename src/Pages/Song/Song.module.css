@@ -43,11 +43,12 @@
   width: 100%;
   height: auto;
   padding: 15px;
-  font-size: 18px;
+  color: rgb(99, 99, 99);
+  font-size: 16px;
   line-height: 35px;
 }
 strong {
-  color: rgb(158, 6, 6);
+  color: #fff;
 }
 .songDetails p {
   margin: auto 0;
@@ -106,7 +107,7 @@ strong {
   text-align: center;
 }
 .lyricsFooter {
-  color: rgb(168, 2, 2);
+  color: rgb(99, 99, 99);
   width: 90%;
   height: 50px;
   text-align: center;

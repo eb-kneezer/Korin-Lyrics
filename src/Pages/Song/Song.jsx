@@ -18,8 +18,8 @@ export default function Song() {
 
   useEffect(() => {
     setMusic(null)
-      getMusic(musicID)
-  }, [musicID])
+      getMusic(musicID)//eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [musicID]) 
   // console.log(music.coverImg)
   // console.log(music)
   return (
@@ -28,7 +28,7 @@ export default function Song() {
       <section className={styles.songInfo}>
         <div
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.8)), url(${music ? music.coverImg : img}) `,
+            backgroundImage: `linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7)), url(${music ? music.coverImg : img}) `,
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             width: '100%',
@@ -90,7 +90,7 @@ export default function Song() {
         <h3>Popular songs</h3>
         <div className={styles.popSongsContainer}>{
           homePopularUS.length > 0 ?
-            homePopularUS.map(item => (
+           [ ...homePopularUK].map(item => (
               <SingleMusic
                 key={item.key}
                 songID={item.key}
