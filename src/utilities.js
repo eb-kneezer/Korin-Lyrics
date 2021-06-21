@@ -32,10 +32,10 @@ const formatSingleMusic = (data) => {
     album: data.sections[0].metadata[0].text,
     label: data.sections[0].metadata[1].text,
     released: data.sections[0].metadata[2].text,
-    lyrics: data.sections[1].text.join("\n"),
+    lyrics: data.sections[1].text ? data.sections[1].text.join("\n") : 'not found',
     footer: data.sections[1].footer,
-    youtubeCaption: data.sections[2].youtubeurl.caption,
-    youtubeURL: data.sections[2].youtubeurl.actions[0].uri
+    youtubeCaption: data.sections[2].youtubeurl ? data.sections[2].youtubeurl.caption : '...',
+    youtubeURL: data.sections[2].youtubeurl ? data.sections[2].youtubeurl.actions[0].uri : '...'
   }
 }
 
@@ -106,6 +106,11 @@ return {
 }
 }
 
+const getImages = (hits, query) => {
+  let selected = hits.find(item => (item.result.primary_artist.name).toLowerCase() === query.toLowerCase())
+  return selected
+}
+
 export {
   shazamBaseUrl, 
   billboardBaseUrl, 
@@ -114,6 +119,7 @@ export {
   formatBillboardAlbum, 
   formatBillboardArtist,
   formatSearchResult,
+  getImages,
   constOptions1,
   constOptions2 
 }

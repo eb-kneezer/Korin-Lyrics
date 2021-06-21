@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import axios from 'axios'
+import apikey from './key'
 
 import {
   shazamBaseUrl,
@@ -11,6 +12,7 @@ import {
   formatBillboardArtist, 
   constOptions1,
   constOptions2,
+  getImages
 } from './utilities'
 
 
@@ -28,7 +30,8 @@ export const MusicContextProvider = ({ children }) => {
   const [homePopularAlbums, setHomePopularAlbums] = useState([])
   const [searchResult, setSearchResult] = useState(null)
   const [music, setMusic] = useState(null)
-  const [artist, setArtist] = useState(null)
+  const [artistSongs, setArtistSongs] = useState([])
+  const [imgArtist, setImgArtist] = useState({})
   const [query, setQuery] = useState('');
 
 
@@ -199,9 +202,9 @@ export const MusicContextProvider = ({ children }) => {
     }
   }
 
-  // --------------GET SINGLE ARTIST DETAILS--------------
+  // --------------GET ARTIST TOP TRACKS--------------
 
-  const getArtist = async (artistID) => {
+  const getArtistSongs = async (artistID) => {
     const options = {
       ...constOptions1,
       url: `${shazamBaseUrl}songs/list-artist-top-tracks`,
@@ -214,14 +217,36 @@ export const MusicContextProvider = ({ children }) => {
     const response = await axios.request(options)
     try{
       const returned = await response.data
-      console.log(returned)
+      setArtistSongs(returned.tracks)
     } catch(err) {
       console.log(err)
     }
   }
-  // const getAlbum = (albumID) => {
 
-  // } 
+// -----------GET ARTIST IMAGES---------
+
+  const getArtistImg = async (query) => {
+    const options = {
+      method: 'GET',
+      url: 'https://genius.p.rapidapi.com/search',
+      params: {
+        q: query
+      },
+      headers: {
+        'x-rapidapi-key': apikey,
+        'x-rapidapi-host': 'genius.p.rapidapi.com'
+      }
+    }
+
+    const response = await axios.request(options)
+    try{
+      const returned = await response.data
+      setImgArtist(getImages(returned.response.hits, query))
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
 
   return (
     <MusicContext.Provider value={{
@@ -231,12 +256,14 @@ export const MusicContextProvider = ({ children }) => {
       popularArtists: [homePopularArtists],
       popularAlbums: [homePopularAlbums],
       song: [music, setMusic],
-      artist: [artist, setArtist],
+      artistSong: [artistSongs, setArtistSongs],
       result: [searchResult, setSearchResult],
       search: [query, setQuery],
+      img: [imgArtist, setImgArtist],
       getQuery,
       getMusic,
-      getArtist,
+      getArtistImg,
+      getArtistSongs,
       // getAlbum
     }}>
       {children}

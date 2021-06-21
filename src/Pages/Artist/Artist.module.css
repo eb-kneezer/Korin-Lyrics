@@ -1,0 +1,56 @@
+.artistHero {
+    height: 25vh;
+    background-color: rgb(126, 0, 0);
+    /* color: black; */
+    margin-bottom: 100px;
+}
+
+.container {
+    height: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 95%;
+}
+
+.heroTop {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    position: relative;
+}
+
+.artistImage {
+    /* border-radius: 50%; */
+    height: 250px;
+    width: 250px;
+    overflow: hidden;
+    position: absolute;
+    bottom: -70px;
+}
+
+.artistImage img {
+    height: 100%;
+    border-radius: 0;
+}
+
+.artistDetails {
+    margin: 0 0 30px 280px;
+}
+
+.heroBottom {
+    height: 100px;
+    /* background-color: rgba(240, 248, 255, 0.164); */
+}
+
+.artistSongs {
+    min-height: 60vh;
+    padding: 40px 0;
+}
+
+.artistItems {
+    padding:30px 15px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}

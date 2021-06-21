@@ -14,14 +14,14 @@ export default function Song() {
   const [music, setMusic] = song
 
 
+
   const { musicID } = useParams()
 
   useEffect(() => {
     setMusic(null)
       getMusic(musicID)//eslint-disable-next-line react-hooks/exhaustive-deps
   }, [musicID]) 
-  // console.log(music.coverImg)
-  // console.log(music)
+  
   return (
     <div className={styles.container}>
 
