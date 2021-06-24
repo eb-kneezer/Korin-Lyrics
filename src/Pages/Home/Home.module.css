@@ -5,7 +5,7 @@
 }
 
 .hero {
-  height: 80vh;
+  height: 50vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)),
     url("../../assets/heroSmall.jpg");
   background-position: center;
@@ -52,6 +52,7 @@
 .popGroup {
   background-color: inherit;
   margin-top: 30px;
+  width: 100%;
 }
 
 .popHeader {
@@ -79,4 +80,41 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+}
+
+.favBox {
+  height: 200px;
+  margin: 30px;
+  background-image: url("../../assets/fav2.jpg");
+  background-size: cover;
+  background-position: 0% 28%;
+  display: flex;
+  align-items: center;
+}
+
+.favBoxIcons,
+.favBoxText {
+  width: 50%;
+}
+
+.favBoxText {
+  text-align: right;
+  margin-right: 50px;
+}
+
+.favBoxText h2 {
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.favBoxCta button {
+  outline: none;
+  border: 2px solid transparent;
+  margin-left: 25px;
+  padding: 7px 25px;
+  cursor: pointer;
+}
+
+.favBoxCta button:hover {
+  border: 2px solid black;
 }

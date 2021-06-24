@@ -30,3 +30,50 @@ ul {
   text-decoration: none;
   padding: 0 20px;
 }
+
+.navauth {
+  display: flex;
+  align-items: center;
+}
+
+.navauth button {
+  outline: none;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  margin-left: 15px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.navauth button:hover {
+  color: rgb(13, 12, 63);
+  font-weight: 700;
+}
+
+.authprofile {
+  display: flex;
+  align-items: center;
+}
+
+.profiletext {
+  color: #fff;
+  text-align: right;
+  letter-spacing: 0.5px;
+}
+
+.profiletext p {
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.profileimg {
+  width: 40px;
+  height: 40px;
+  margin-left: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profileimg img {
+  height: 100%;
+}

@@ -1,29 +1,47 @@
-import React from 'react'
+import React, { useContext } from "react";
 
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { MusicContext } from "../../context";
 
-import styles from './NavHeader.module.css'
+import styles from "./NavHeader.module.css";
 
 export default function NavHeader() {
+  const { doSignIn, doSignOut, currentUser } = useContext(MusicContext);
+  const [user] = currentUser;
+
   return (
     <nav>
-      <div >
-        <Link className={styles.logo} to='/'>
-          {/* <img alt='logo' src="https://img.icons8.com/ios/50/000000/music--v1.png"/> */}
+      <div>
+        <Link className={styles.logo} to="/">
           <span>KORIN</span>
         </Link>
-        {/* <a href="https://icons8.com/icon/381/music">Music icon by Icons8</a> */}
       </div>
       <ul className={styles.navlinks}>
-        <Link className={styles.links} to='/artist'>Popular</Link>
-        <Link className={styles.links} to='/song'>Charts</Link>
+        <Link className={styles.links} to="/artist">
+          Popular
+        </Link>
+        <Link className={styles.links} to="/song">
+          Charts
+        </Link>
       </ul>
-      <div className={styles.navsearch}>
-        <form>
-          <input type="search" name="" id=""/>
-          <button>GO</button>
-        </form>
-      </div>
+      {user ? (
+        <div className={styles.navauth}>
+          <div className={styles.authprofile}>
+            <div className={styles.profiletext}>
+              <h4>{user.username}</h4>
+              <p>{user.email}</p>
+            </div>
+            <div className={styles.profileimg}>
+              <img src={user.photo} alt={user.username} />
+            </div>
+          </div>
+          <button onClick={doSignOut}>SIGN OUT</button>
+        </div>
+      ) : (
+        <div className={styles.navauth}>
+          <button onClick={doSignIn}>LOG IN</button>
+        </div>
+      )}
     </nav>
-  )
+  );
 }

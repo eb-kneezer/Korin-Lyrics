@@ -7,30 +7,19 @@
 .singleMusic {
   width: 150px;
   position: relative;
-  /* height: 200px; */
-  /* background-color: rgba(238, 238, 238, 0.07); */
   overflow: hidden;
-  cursor: pointer;
 }
 
-.singleMusic:hover {
-  background-color: rgba(85, 85, 85, 0.123);
-}
-
-
-img {
+.singleMusic img {
   max-width: 100%;
   height: 150px;
-  /* border-radius: 5px; */
 }
 
-.singleMusic:hover .singleLink::after {
-  /* box-shadow: 0px 0px 10px 10px rgba(170, 0, 0, 0.192); */
+.singleLink:hover::after {
   content: "KORIN";
   position: absolute;
   width: 100%;
   height: 150px;
-  /* border-radius: 5px; */
   top: 75px;
   left: 75px;
   transform: translate(-50%, -50%);
@@ -44,16 +33,12 @@ img {
   justify-content: center;
 }
 
-/* .hover {
-  position: absolute;
-  top: -50px;
-} */
-
 .musicInfo {
   text-align: left;
   padding: 7px 7px 7px 0;
   font-size: 14px;
   color: grey;
+  position: relative;
 }
 
 .musicInfo .title {
@@ -64,4 +49,24 @@ img {
 .singleLink {
   text-decoration: none;
   color: inherit;
+}
+
+.faved {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  padding: 2px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  top: 10px;
+  right: 5px;
+  cursor: pointer;
+}
+
+.faved:hover {
+  border: 1px solid red;
+}
+
+.faved img {
+  height: 100%;
 }
