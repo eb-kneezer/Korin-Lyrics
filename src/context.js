@@ -138,27 +138,26 @@ export const MusicContextProvider = ({ children }) => {
       }
     };
 
-    db.ref(`users/${user.uid}/favSongs`).on("value", (snapshot) => {
-      console.log(snapshot.val());
-      // const dbUser = { uid: user.uid, ...snapshot.val() };
-      // localStorage.setItem("currentUser", JSON.stringify(dbUser));
-      // setUser(dbUser);
-    });
+    // db.ref(`users/${user.uid}/favSongs`).on("value", (snapshot) => {
+    //   console.log(snapshot.val());
+    // const dbUser = { uid: user.uid, ...snapshot.val() };
+    // localStorage.setItem("currentUser", JSON.stringify(dbUser));
+    // setUser(dbUser);
+    // });
 
     // --------- FIREBASE USER LISTENER-----
     auth.onAuthStateChanged((user) => {
-      if (user) {
-        db.ref(`users/${user.uid}`)
-          .once("value")
-          .then((snapshot) => {
-            const dbUser = { uid: user.uid, ...snapshot.val() };
-            localStorage.setItem("currentUser", JSON.stringify(dbUser));
-            setUser(dbUser);
-          });
-      } else {
-        localStorage.removeItem("currentUser");
-        setUser("");
-      }
+      user
+        ? db
+            .ref(`users/${user.uid}`)
+            .once("value")
+            .then((snapshot) => {
+              const dbUser = { uid: user.uid, ...snapshot.val() };
+              localStorage.setItem("currentUser", JSON.stringify(dbUser));
+              setUser(dbUser);
+            })
+        : localStorage.removeItem("currentUser");
+      setUser("");
     });
 
     getAfroBeats();
@@ -263,13 +262,12 @@ export const MusicContextProvider = ({ children }) => {
     auth
       .signInWithPopup(provider)
       .then((result) => {
-        return db.ref(`users/${result.user.uid}`).set({
-          username: result.user.displayName,
-          email: result.user.email,
-          photo: result.user.photoURL,
-          favSongs: { init: "000" },
-          favArtist: { init: "000" },
-        });
+        result.additionalUserInfo.isNewUser &&
+          db.ref(`users/${result.user.uid}`).set({
+            username: result.user.displayName,
+            email: result.user.email,
+            photo: result.user.photoURL,
+          });
       })
       .catch((err) => console.log(err));
   };
@@ -280,29 +278,18 @@ export const MusicContextProvider = ({ children }) => {
     auth.signOut();
   };
 
-  // -------ADD FAVORITE ---------
-
-  // const addToFave = (songID, title) => {
-  //   if (user) {
-  //     const newData = { ...user.favSongs, [title]: songID };
-
-  //     db.ref(`users/${user.uid}`).child("favSongs").update(newData);
-  //   }
-  // };
-  // user.uid, songID, "favSongs";
-  // userID, id, type;
-
-  // .then(() => {
-  // });
-  // }
-  // .then(() => {
-  // db.ref(`users/${user.uid}`).once("value");
-  // .then((snapshot) => {
-  //   const dbUser = { uid: user.uid, ...snapshot.val() };
-  //   localStorage.setItem("currentUser", JSON.stringify(dbUser));
-  //   setUser(dbUser);
-  // });
-  // });
+  // ---------UPDATE STATE ON CHANGE -----
+  const updateFavState = () => {
+    db.ref(`users/${user.uid}/favSongs`).on("value", (snapshot) => {
+      const data = snapshot.val();
+      console.log(data);
+      localStorage.setItem(
+        "currentUser",
+        JSON.stringify({ ...user, favSongs: data })
+      );
+      setUser({ ...user, favSongs: data });
+    });
+  };
 
   return (
     <MusicContext.Provider
@@ -320,7 +307,7 @@ export const MusicContextProvider = ({ children }) => {
         currentUser: [user, setUser],
         doSignIn,
         doSignOut,
-        // addToFave,
+        updateFavState,
         getQuery,
         getMusic,
         getArtistImg,

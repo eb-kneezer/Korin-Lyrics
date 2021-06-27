@@ -15,23 +15,8 @@ export default function SingleMusic({
   songID,
   artistID,
 }) {
-  const { currentUser } = useContext(MusicContext);
+  const { currentUser, updateFavState } = useContext(MusicContext);
   const [user] = currentUser;
-
-  // const addToFave = (songID) => {
-  //   console.log("updated");
-  //   // doSOmething
-  //   if (user) {
-
-  //   }
-  // };
-  // const addToFave = (songID, title) => {
-  //   if (user) {
-  //     const newData = { ...user.favSongs, [title]: songID };
-
-  //     db.ref(`users/${user.uid}`).child("favSongs").update(newData);
-  //   }
-  // };
 
   return (
     <div className={styles.singleMusic}>
@@ -43,29 +28,26 @@ export default function SingleMusic({
         <p id={artistID}>{artist}</p>
         <div
           className={styles.faved}
-          // onClick={(songID, title) => {
-          //   if (user) {
-          //     let newData = { ...user.favSongs, [title]: songID };
-          //     let newPostKey = db
-          //       .ref()
-          //       .child("users/" + user.id + "/favSongs")
-          //       .push().key;
+          onClick={() => {
+            // let newPostKey = db.ref().child("users").push().key;
+            user &&
+              db.ref(`users/${user.uid}/favSongs/`).update({
+                [title.replace(/[^a-zA-Z0-9]/g, "")]: songID,
+              });
 
-          //     console.log(newPostKey);
-
-          //     let updates = {};
-          //     // updates['/users/' + newPostKey] = newData;
-          //     updates[
-          //       "users/" + user.uid + "/favSongs/" + "Mcyvhj5HTcUndY9Jyq"
-          //     ] = newData;
-
-          //     return db.ref().update(updates);
-
-          //     // db.ref(`users/${user.uid}/favSongs`).set(newData);
-          //   }
-          // }}
+            updateFavState();
+          }}
         >
-          <img src={fave} alt="fave" />
+          <img
+            src={
+              !user
+                ? fave
+                : Object.values(user.favSongs).includes(songID)
+                ? faveCheck
+                : fave
+            }
+            alt="fave"
+          />
         </div>
       </div>
     </div>

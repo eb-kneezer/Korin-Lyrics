@@ -63,9 +63,9 @@
   cursor: pointer;
 }
 
-.faved:hover {
+/* .faved:hover {
   border: 1px solid red;
-}
+} */
 
 .faved img {
   height: 100%;
