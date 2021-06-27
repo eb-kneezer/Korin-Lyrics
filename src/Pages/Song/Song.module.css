@@ -23,7 +23,7 @@
 
 .songTitle {
   margin: 0 0 20px 20px;
-} 
+}
 .songTitle h1 {
   font-size: 40px;
 }
@@ -88,14 +88,13 @@ strong {
   height: 88%;
   white-space: pre-wrap;
   overflow-y: scroll;
-
 }
 .lyricsContainer {
   padding: 10px;
   width: 60%;
   height: auto;
   margin: 0 auto;
-  line-height: 35px;
+  line-height: 30px;
   text-align: center;
 }
 .lyricsFooter {
@@ -105,11 +104,19 @@ strong {
   text-align: center;
 }
 
-.popSongs {
+.popSong {
   flex: 2;
+  /* display: flex; */
+  /* flex-direction: column; */
+}
+
+.popSongs {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 70%;
+  overflow-y: scroll;
+  /* overflow: hidden; */
 }
 .popSongs h3 {
   padding-bottom: 10px;
@@ -136,5 +143,8 @@ strong {
   background: rgb(221, 0, 0);
 }
 
-
-
+/* iframe {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+} */

@@ -160,9 +160,9 @@ export const MusicContextProvider = ({ children }) => {
       setUser("");
     });
 
-    getAfroBeats();
-    // getSongsUS()
-    // getSongsUK()
+    // getAfroBeats();
+    // getSongsUS();
+    // getSongsUK();
     // getBillboardArtists()
     // getBillboardAlbums()
   }, []);
