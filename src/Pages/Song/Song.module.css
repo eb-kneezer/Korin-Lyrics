@@ -5,8 +5,8 @@
 }
 
 .container {
-  height: 80vh;
-  margin: 50px auto;
+  height: 70vh;
+  margin: 50px auto 20px;
   max-width: 1200px;
   width: 95%;
   display: flex;
@@ -23,6 +23,7 @@
 
 .songTitle {
   margin: 0 0 20px 20px;
+  color: #fff;
 }
 .songTitle h1 {
   font-size: 40px;
@@ -53,6 +54,7 @@ strong {
   border-radius: 5px;
   margin-left: 10px;
   background-color: rgb(24, 24, 24);
+  -webkit-animation: blinker 2s ease-in infinite;
   animation: blinker 2s ease-in infinite;
 }
 .songTitleLoading {
@@ -61,7 +63,13 @@ strong {
   width: 230px;
   border-radius: 5px;
   background-color: rgb(24, 24, 24);
+  -webkit-animation: blinker 2s ease-in infinite;
   animation: blinker 2s ease-in infinite;
+}
+@-webkit-keyframes blinker {
+  50% {
+    opacity: 0.8;
+  }
 }
 @keyframes blinker {
   50% {
@@ -73,7 +81,7 @@ strong {
   flex: 3;
 }
 .lyricsInfo {
-  height: 12%;
+  min-height: 70px;
   text-align: center;
 }
 .songLyrics hr {
@@ -143,8 +151,26 @@ strong {
   background: rgb(221, 0, 0);
 }
 
-/* iframe {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-} */
+@media only screen and (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .songInfo {
+    display: block;
+    margin-bottom: 100px;
+  }
+  .songCover {
+    height: 100%;
+  }
+
+  .popSongs {
+    height: auto;
+  }
+
+  iframe {
+    display: flex;
+    margin: 0 auto 50px;
+  }
+}

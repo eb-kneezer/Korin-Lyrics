@@ -13,7 +13,6 @@ export default function Song() {
   const [homePopularUK] = popularUK;
   const [music, setMusic] = song;
 
-  // console.log(music.youtubeURL);
   const youtubeID = music && music.youtubeURL.split("/")[3].split("?")[0];
   // console.log(youtubeID);
 
@@ -40,8 +39,7 @@ export default function Song() {
             flexDirection: "column",
             justifyContent: "flex-end",
           }}
-          className={styles.songCover}
-        >
+          className={styles.songCover}>
           <div className={styles.songTitle}>
             <h1>
               {music ? (
@@ -61,7 +59,7 @@ export default function Song() {
         </div>
         <div className={styles.songDetails}>
           <p>
-            genre:{" "}
+            Genre:{" "}
             <strong>
               {music ? (
                 music.genre
@@ -70,7 +68,7 @@ export default function Song() {
               )}
             </strong>
             <br />
-            album:{" "}
+            Album:{" "}
             <strong>
               {music ? (
                 music.album
@@ -79,7 +77,7 @@ export default function Song() {
               )}
             </strong>
             <br />
-            released:{" "}
+            Released:{" "}
             <strong>
               {music ? (
                 music.released
@@ -88,7 +86,7 @@ export default function Song() {
               )}
             </strong>
             <br />
-            label:{" "}
+            Label:{" "}
             <strong>
               {music ? (
                 music.label
@@ -149,15 +147,19 @@ export default function Song() {
 
       <section className={styles.popSong}>
         <iframe
-          width="350"
-          height="198"
-          src={`https://youtube.com/embed/${youtubeID}`}
-        ></iframe>
+          title='{music.youtubeCaption}'
+          style={{
+            width: "350px",
+            height: "198px",
+            border: "none",
+          }}
+          frameBorder='0'
+          src={`https://youtube.com/embed/${youtubeID}`}></iframe>
         <div className={styles.popSongs}>
           <h3>Popular songs</h3>
           <div className={styles.popSongsContainer}>
-            {homePopularUS.length > 0 ? (
-              [...homePopularUK].map((item) => (
+            {homePopularUS.length > 0 && homePopularUK.length > 0 ? (
+              [...homePopularUK].map(item => (
                 <SingleMusic
                   key={item.key}
                   songID={item.key}
@@ -168,7 +170,7 @@ export default function Song() {
                 />
               ))
             ) : (
-              <Loading type="song" />
+              <Loading type='song' />
             )}
           </div>
         </div>

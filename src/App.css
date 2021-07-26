@@ -4,3 +4,16 @@ body {
   color: #000;
   background-color: #fff;
 }
+
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 900px) {
+  .App {
+    height: 100%;
+  }
+}

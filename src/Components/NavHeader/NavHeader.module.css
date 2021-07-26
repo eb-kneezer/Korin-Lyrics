@@ -5,9 +5,16 @@
 }
 
 nav {
-  padding: 10px 15%;
-  background-color: rgb(13, 12, 63);
+  background-color: rgb(12, 12, 12);
+}
+
+.navContainer {
+  max-width: 1200px;
+  width: 95%;
+  margin: 0 auto;
+  padding: 10px 0;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -76,4 +83,10 @@ ul {
 
 .profileimg img {
   height: 100%;
+}
+
+@media only screen and (max-width: 400px) {
+  .links {
+    display: none;
+  }
 }

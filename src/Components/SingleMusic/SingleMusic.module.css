@@ -34,14 +34,18 @@
 }
 
 .musicInfo {
-  text-align: left;
+  display: flex;
   padding: 7px 7px 7px 0;
   font-size: 14px;
   color: grey;
   position: relative;
 }
 
-.musicInfo .title {
+.musicText {
+  flex: 1;
+}
+
+.musicText .title {
   font-weight: 600;
   color: rgb(39, 39, 39);
 }
@@ -52,20 +56,13 @@
 }
 
 .faved {
-  position: absolute;
   width: 25px;
   height: 25px;
   padding: 2px;
   border: 1px solid transparent;
   border-radius: 50%;
-  top: 10px;
-  right: 5px;
   cursor: pointer;
 }
-
-/* .faved:hover {
-  border: 1px solid red;
-} */
 
 .faved img {
   height: 100%;

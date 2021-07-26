@@ -105,7 +105,7 @@ export const MusicContextProvider = ({ children }) => {
         ...constOptions2,
         url: `${billboardBaseUrl}artist-100`,
         params: {
-          date: "2021-05-20",
+          date: "2021-06-20",
           range: "1-9",
         },
       };
@@ -124,7 +124,7 @@ export const MusicContextProvider = ({ children }) => {
         ...constOptions2,
         url: `${billboardBaseUrl}billboard-200`,
         params: {
-          date: "2021-05-20",
+          date: "2021-06-20",
           range: "1-9",
         },
       };
@@ -146,12 +146,12 @@ export const MusicContextProvider = ({ children }) => {
     // });
 
     // --------- FIREBASE USER LISTENER-----
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(user => {
       user
         ? db
             .ref(`users/${user.uid}`)
             .once("value")
-            .then((snapshot) => {
+            .then(snapshot => {
               const dbUser = { uid: user.uid, ...snapshot.val() };
               localStorage.setItem("currentUser", JSON.stringify(dbUser));
               setUser(dbUser);
@@ -160,16 +160,16 @@ export const MusicContextProvider = ({ children }) => {
       setUser("");
     });
 
-    // getAfroBeats();
-    // getSongsUS();
-    // getSongsUK();
-    // getBillboardArtists()
-    // getBillboardAlbums()
+    getAfroBeats();
+    getSongsUS();
+    getSongsUK();
+    getBillboardArtists();
+    getBillboardAlbums();
   }, []);
 
   // ------------SEARCH QUERY FUNCTION -------------
 
-  const getQuery = async (query) => {
+  const getQuery = async query => {
     const options = {
       ...constOptions1,
       url: `${shazamBaseUrl}search`,
@@ -193,28 +193,35 @@ export const MusicContextProvider = ({ children }) => {
 
   // ------------GET SINGLE MUSIC DETAILS---------------
 
-  const getMusic = async (musicID) => {
-    const options = {
-      ...constOptions1,
-      url: `${shazamBaseUrl}songs/get-details`,
-      params: {
-        key: musicID,
-        locale: "en-US",
-      },
-    };
+  const getMusic = async musicID => {
+    const musicMemo = {};
 
-    const response = await axios.request(options);
-    try {
-      const returned = await response.data;
-      setMusic(formatSingleMusic(returned));
-    } catch (err) {
-      console.log(err);
+    if (musicMemo[musicID]) {
+      setMusic(musicMemo[musicID]);
+    } else {
+      const options = {
+        ...constOptions1,
+        url: `${shazamBaseUrl}songs/get-details`,
+        params: {
+          key: musicID,
+          locale: "en-US",
+        },
+      };
+
+      const response = await axios.request(options);
+      try {
+        const returned = await response.data;
+        musicMemo[musicID] = formatSingleMusic(returned);
+        setMusic(musicMemo[musicID]);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
   // --------------GET ARTIST TOP TRACKS--------------
 
-  const getArtistSongs = async (artistID) => {
+  const getArtistSongs = async artistID => {
     const options = {
       ...constOptions1,
       url: `${shazamBaseUrl}songs/list-artist-top-tracks`,
@@ -227,6 +234,7 @@ export const MusicContextProvider = ({ children }) => {
     const response = await axios.request(options);
     try {
       const returned = await response.data;
+      console.log(returned.tracks);
       setArtistSongs(returned.tracks);
     } catch (err) {
       console.log(err);
@@ -235,7 +243,7 @@ export const MusicContextProvider = ({ children }) => {
 
   // -----------GET ARTIST IMAGES---------
 
-  const getArtistImg = async (query) => {
+  const getArtistImg = async query => {
     const options = {
       method: "GET",
       url: "https://genius.p.rapidapi.com/search",
@@ -251,6 +259,7 @@ export const MusicContextProvider = ({ children }) => {
     const response = await axios.request(options);
     try {
       const returned = await response.data;
+      console.log("it ran");
       setImgArtist(getImages(returned.response.hits, query));
     } catch (err) {
       console.log(err);
@@ -261,7 +270,7 @@ export const MusicContextProvider = ({ children }) => {
   const doSignIn = () => {
     auth
       .signInWithPopup(provider)
-      .then((result) => {
+      .then(result => {
         result.additionalUserInfo.isNewUser &&
           db.ref(`users/${result.user.uid}`).set({
             username: result.user.displayName,
@@ -269,7 +278,7 @@ export const MusicContextProvider = ({ children }) => {
             photo: result.user.photoURL,
           });
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   };
 
   // ------SIGN OUT ----------
@@ -280,7 +289,7 @@ export const MusicContextProvider = ({ children }) => {
 
   // ---------UPDATE STATE ON CHANGE -----
   const updateFavState = () => {
-    db.ref(`users/${user.uid}/favSongs`).on("value", (snapshot) => {
+    db.ref(`users/${user.uid}/favSongs`).on("value", snapshot => {
       const data = snapshot.val();
       console.log(data);
       localStorage.setItem(
@@ -313,8 +322,7 @@ export const MusicContextProvider = ({ children }) => {
         getArtistImg,
         getArtistSongs,
         // getAlbum
-      }}
-    >
+      }}>
       {children}
     </MusicContext.Provider>
   );

@@ -19,7 +19,10 @@ const constOptions2 = {
   },
 };
 
-const formatSingleMusic = (data) => {
+const formatSingleMusic = data => {
+  const lyric = data.sections.filter(section => section.type === "LYRICS")[0];
+  const youTube = data.sections.filter(section => section.type === "VIDEO")[0];
+
   return {
     key: data.key,
     title: data.title,
@@ -27,26 +30,20 @@ const formatSingleMusic = (data) => {
     coverImg: data.images.coverarthq,
     backgroundImg: data.images.background,
     shazam: data.url,
-    artistID: data.artists[0].id,
-    genre: data.genres.primary,
+    // artistID: data.artists[0].id,
+    genre: data.genres ? data.genres.primary : "unknown",
     album: data.sections[0].metadata[0].text,
     label: data.sections[0].metadata[1].text,
     released: data.sections[0].metadata[2].text,
-    lyrics: data.sections[1].text
-      ? data.sections[1].text.join("\n")
-      : "not found",
-    footer: data.sections[1].footer,
-    youtubeCaption: data.sections[2].youtubeurl
-      ? data.sections[2].youtubeurl.caption
-      : "...",
-    youtubeURL: data.sections[2].youtubeurl
-      ? data.sections[2].youtubeurl.actions[0].uri
-      : "...",
+    lyrics: lyric ? lyric.text.join("\n") : "not found",
+    footer: lyric ? lyric.footer : "...",
+    youtubeCaption: youTube.youtubeurl.caption || "...",
+    youtubeURL: youTube.youtubeurl.actions[0].uri || null,
   };
 };
 
-const formatDataShazam = (data) => {
-  const newTracks = data.map((track) => {
+const formatDataShazam = data => {
+  const newTracks = data.map(track => {
     return {
       key: track.key,
       title: track.title,
@@ -58,7 +55,7 @@ const formatDataShazam = (data) => {
   return newTracks;
 };
 
-const formatBillboardArtist = (data) => {
+const formatBillboardArtist = data => {
   let formatted = [];
   for (let item in data) {
     formatted.push({
@@ -69,7 +66,7 @@ const formatBillboardArtist = (data) => {
   return formatted;
 };
 
-const formatBillboardAlbum = (data) => {
+const formatBillboardAlbum = data => {
   let formatted = [];
   for (let item in data) {
     formatted.push({
@@ -81,11 +78,11 @@ const formatBillboardAlbum = (data) => {
   return formatted;
 };
 
-const formatSearchResult = (result) => {
+const formatSearchResult = result => {
   let formattedSongs = [];
   let formattedArtist = [];
 
-  result.tracks.hits.forEach((item) => {
+  result.tracks.hits.forEach(item => {
     formattedSongs.push({
       key: item.track.key,
       title: item.track.title,
@@ -95,7 +92,7 @@ const formatSearchResult = (result) => {
     });
   });
 
-  result.artists.hits.forEach((item) => {
+  result.artists.hits.forEach(item => {
     formattedArtist.push({
       avatar: item.artist.avatar,
       name: item.artist.name,
@@ -111,10 +108,17 @@ const formatSearchResult = (result) => {
 
 const getImages = (hits, query) => {
   let selected = hits.find(
-    (item) =>
+    item =>
       item.result.primary_artist.name.toLowerCase() === query.toLowerCase()
   );
   return selected;
+};
+
+const shortenText = text => {
+  if (text.length > 30) {
+    return text.slice(0, 19) + "...";
+  }
+  return text;
 };
 
 export {
@@ -128,4 +132,5 @@ export {
   getImages,
   constOptions1,
   constOptions2,
+  shortenText,
 };

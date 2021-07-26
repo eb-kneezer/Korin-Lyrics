@@ -7,6 +7,7 @@ import faveCheck from "../../assets/favorite-check.svg";
 import { MusicContext } from "../../context";
 
 import { db } from "../../firebase";
+import { shortenText } from "../../utilities";
 
 export default function SingleMusic({
   title,
@@ -21,23 +22,27 @@ export default function SingleMusic({
   return (
     <div className={styles.singleMusic}>
       <Link className={styles.singleLink} to={`/song/${songID}`}>
-        <img className={styles.singleImg} src={image} alt="music" />
+        <img className={styles.singleImg} src={image} alt='music' />
       </Link>
       <div className={styles.musicInfo}>
-        <p className={styles.title}>{title}</p>
-        <p id={artistID}>{artist}</p>
+        <div className={styles.musicText}>
+          <p className={styles.title}>{shortenText(title)}</p>
+          <p id={artistID}>{shortenText(artist)}</p>
+        </div>
         <div
           className={styles.faved}
           onClick={() => {
-            // let newPostKey = db.ref().child("users").push().key;
-            user &&
-              db.ref(`users/${user.uid}/favSongs/`).update({
-                [title.replace(/[^a-zA-Z0-9]/g, "")]: songID,
-              });
-
-            updateFavState();
-          }}
-        >
+            user
+              ? db
+                  .ref(`users/${user.uid}/favSongs/`)
+                  .update({
+                    [title.replace(/[^a-zA-Z0-9]/g, "")]: songID,
+                  })
+                  .then(() => {
+                    updateFavState();
+                  })
+              : alert("you have to be logged in.");
+          }}>
           <img
             src={
               !user
@@ -46,7 +51,7 @@ export default function SingleMusic({
                 ? faveCheck
                 : fave
             }
-            alt="fave"
+            alt='fave'
           />
         </div>
       </div>

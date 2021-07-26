@@ -25,8 +25,6 @@ export default function Home() {
   const [homePopularAlbums] = popularAlbums;
   const [user] = currentUser;
 
-  // console.log(object)
-
   return (
     <div>
       <section className={styles.hero}>
@@ -35,7 +33,7 @@ export default function Home() {
             <h1>
               <span>Korin</span> along with your faves
             </h1>
-            <h3>discover new songs</h3>
+            <h3>discover new music</h3>
             <Search />
           </div>
         </div>
@@ -49,7 +47,7 @@ export default function Home() {
             </div>
             <div className={styles.popitems}>
               {afroBeats.length > 0 ? (
-                afroBeats.map((item) => (
+                afroBeats.map(item => (
                   <SingleMusic
                     key={item.key}
                     songID={item.key}
@@ -60,7 +58,7 @@ export default function Home() {
                   />
                 ))
               ) : (
-                <Loading type="song" />
+                <Loading type='song' />
               )}
             </div>
           </div>
@@ -75,7 +73,7 @@ export default function Home() {
             </div>
             <div className={styles.popitems}>
               {homePopularUS.length > 0 ? (
-                homePopularUS.map((item) => (
+                homePopularUS.map(item => (
                   <SingleMusic
                     key={item.key}
                     songID={item.key}
@@ -86,7 +84,7 @@ export default function Home() {
                   />
                 ))
               ) : (
-                <Loading type="song" />
+                <Loading type='song' />
               )}
             </div>
           </div>
@@ -101,7 +99,7 @@ export default function Home() {
             </div>
             <div className={styles.popitems}>
               {homePopularUK.length > 0 ? (
-                homePopularUK.map((item) => (
+                homePopularUK.map(item => (
                   <SingleMusic
                     key={item.key}
                     songID={item.key}
@@ -112,7 +110,7 @@ export default function Home() {
                   />
                 ))
               ) : (
-                <Loading type="song" />
+                <Loading type='song' />
               )}
             </div>
           </div>
@@ -132,26 +130,10 @@ export default function Home() {
                   <h2>Find lyrics to your favourites easily</h2>
                   <div className={styles.favBoxCta}>
                     <button onClick={doSignIn}>Log in</button>
-                    <button>Sign up</button>
                   </div>
                 </div>
               </div>
             )}
-            {/* <div className={styles.popitems}>
-              {
-                homePopularUK.length > 0 ?
-                  homePopularUK.map(item => (
-                    <SingleMusic 
-                    key={item.key} 
-                    songID={item.key} 
-                    title={item.title} 
-                    artist={item.subtitle} 
-                    image={item.image} 
-                    artistID={item.artistId} />
-                  )) :
-                  <Loading type="song" />
-              }
-            </div> */}
           </div>
         </div>
       </section>
@@ -164,11 +146,11 @@ export default function Home() {
             </div>
             <div className={styles.popartists}>
               {homePopularArtists.length > 0 ? (
-                homePopularArtists.map((item) => (
+                homePopularArtists.map(item => (
                   <SingleArtist key={item.key} artist={item.artist} />
                 ))
               ) : (
-                <Loading type="artalb" />
+                <Loading type='artalb' />
               )}
             </div>
           </div>
@@ -183,7 +165,7 @@ export default function Home() {
             </div>
             <div className={styles.popartists}>
               {homePopularAlbums.length > 0 ? (
-                homePopularAlbums.map((item) => (
+                homePopularAlbums.map(item => (
                   <SingleAlbum
                     key={item.key}
                     title={item.album}
@@ -191,7 +173,7 @@ export default function Home() {
                   />
                 ))
               ) : (
-                <Loading type="artalb" />
+                <Loading type='artalb' />
               )}
             </div>
           </div>

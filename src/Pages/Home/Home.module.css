@@ -5,14 +5,13 @@
 }
 
 .hero {
-  height: 50vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)),
-    url("../../assets/heroSmall.jpg");
+  height: 40vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.267), rgba(0, 0, 0, 0)),
+    url("../../assets/hero2.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  /* opacity: 0.5; */
 }
 
 .searchContainer {
@@ -35,18 +34,18 @@
 }
 
 .heroCta {
-  width: 50%;
-  margin-left: auto;
-  padding: 100px 100px 0 0;
+  width: 100%;
+  padding-top: 80px;
   display: flex;
-  text-align: right;
+  text-align: center;
+  align-items: center;
   flex-direction: column;
-  /* justify-content: center; */
+  color: rgb(255, 255, 255);
 }
 
 .heroCta h1 {
   font-size: 64px;
-  color: beige;
+  margin-bottom: 20px;
 }
 
 .popGroup {
