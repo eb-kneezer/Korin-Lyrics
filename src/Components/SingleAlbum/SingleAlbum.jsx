@@ -1,16 +1,16 @@
-import React from 'react'
+import React from "react";
 
-import styles from './SingleAlbum.module.css'
-import img from '../../assets/album.svg'
+import styles from "./SingleAlbum.module.css";
+import img from "../../assets/album.svg";
 
-export default function SingleAlbum({artist, title}) {
+export default function SingleAlbum({ artist, title }) {
   return (
     <div className={styles.singleAlbum}>
-      <img className={styles.albumImg} src={img} alt="album"/>
+      <img loading='lazy' className={styles.albumImg} src={img} alt='album' />
       <div className={styles.albumInfo}>
         <h4>{title}</h4>
         <p>{artist}</p>
       </div>
     </div>
-  )
+  );
 }

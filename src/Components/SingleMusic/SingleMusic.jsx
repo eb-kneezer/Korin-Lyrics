@@ -22,7 +22,12 @@ export default function SingleMusic({
   return (
     <div className={styles.singleMusic}>
       <Link className={styles.singleLink} to={`/song/${songID}`}>
-        <img className={styles.singleImg} src={image} alt='music' />
+        <img
+          loading='lazy'
+          className={styles.singleImg}
+          src={image}
+          alt='music'
+        />
       </Link>
       <div className={styles.musicInfo}>
         <div className={styles.musicText}>
@@ -44,6 +49,7 @@ export default function SingleMusic({
               : alert("you have to be logged in.");
           }}>
           <img
+            loading='lazy'
             src={
               !user
                 ? fave
