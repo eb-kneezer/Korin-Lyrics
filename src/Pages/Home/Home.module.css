@@ -6,7 +6,7 @@
 
 .hero {
   height: 40vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.267), rgba(0, 0, 0, 0)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.267), rgba(0, 0, 0, 0.267)),
     url("../../assets/hero2.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -41,6 +41,12 @@
   align-items: center;
   flex-direction: column;
   color: rgb(255, 255, 255);
+}
+
+@media screen and (max-width: 900px) {
+  .heroCta {
+    padding-top: 20px;
+  }
 }
 
 .heroCta h1 {

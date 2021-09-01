@@ -1,8 +1,12 @@
 .artistHero {
-  height: 25vh;
+  height: 45vh;
   background-color: rgb(126, 0, 0);
   /* color: black; */
   margin-bottom: 100px;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  /* background-repeat: repeat; */
+  /* background-size: cover; */
 }
 
 .container {

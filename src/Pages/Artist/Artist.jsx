@@ -1,12 +1,13 @@
 import React, { useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../../Components/Loading/Loading";
+import LoadingPage from "../../Components/LoadingPage/LoadingPage";
 import SingleMusic from "../../Components/SingleMusic/SingleMusic";
 import styles from "./Artist.module.css";
 
 import { MusicContext } from "../../context";
 
-import defImg from "../../assets/hero.jpeg";
+import defImg from "../../assets/hero2.jpg";
 
 export default function Artist() {
   const { img, artistSong, getArtistSongs } = useContext(MusicContext);
@@ -20,8 +21,11 @@ export default function Artist() {
     getArtistSongs(artistID); //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [artistID]);
 
-  const { header_image_url, image_url, name } =
-    imgArtist && imgArtist.result.primary_artist;
+  if (!imgArtist) {
+    return <LoadingPage />;
+  }
+
+  const { header_image_url, image_url, name } = imgArtist.result.primary_artist;
 
   return (
     <div>
@@ -31,7 +35,7 @@ export default function Artist() {
           backgroundImage: `linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.9)), url(${
             header_image_url ? header_image_url : defImg
           }) `,
-          backgroundPosition: "center",
+          backgroundPosition: "top",
           backgroundSize: "contain",
         }}>
         <div className={styles.container}>

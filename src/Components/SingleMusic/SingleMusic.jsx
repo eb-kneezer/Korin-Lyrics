@@ -5,7 +5,7 @@ import styles from "./SingleMusic.module.css";
 import fave from "../../assets/favorite.svg";
 import faveCheck from "../../assets/favorite-check.svg";
 import { MusicContext } from "../../context";
-
+import noImg from "../../assets/img-error.png";
 import { db } from "../../firebase";
 import { shortenText } from "../../utilities";
 
@@ -25,7 +25,7 @@ export default function SingleMusic({
         <img
           loading='lazy'
           className={styles.singleImg}
-          src={image}
+          src={image ? image : noImg}
           alt='music'
         />
       </Link>

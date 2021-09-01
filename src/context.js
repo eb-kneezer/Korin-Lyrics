@@ -30,7 +30,9 @@ export const MusicContextProvider = ({ children }) => {
   const [searchResult, setSearchResult] = useState(null);
   const [music, setMusic] = useState(null);
   const [artistSongs, setArtistSongs] = useState([]);
-  const [imgArtist, setImgArtist] = useState({});
+  const [imgArtist, setImgArtist] = useState(
+    JSON.parse(localStorage.getItem("images"))
+  );
   const [query, setQuery] = useState("");
   const [user, setUser] = useState("");
 
@@ -234,7 +236,7 @@ export const MusicContextProvider = ({ children }) => {
     const response = await axios.request(options);
     try {
       const returned = await response.data;
-      console.log(returned.tracks);
+      // console.log(returned.tracks);
       setArtistSongs(returned.tracks);
     } catch (err) {
       console.log(err);
@@ -260,7 +262,11 @@ export const MusicContextProvider = ({ children }) => {
     try {
       const returned = await response.data;
       console.log("it ran");
-      setImgArtist(getImages(returned.response.hits, query));
+      const img = getImages(returned.response.hits, query);
+      localStorage.setItem("images", JSON.stringify(img));
+
+      // console.log(img);
+      setImgArtist(img);
     } catch (err) {
       console.log(err);
     }

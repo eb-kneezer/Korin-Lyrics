@@ -1,0 +1,13 @@
+.loadingPage {
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.loadingText {
+  text-align: center;
+}
+
+h1 {
+  font-size: 38px;
+}
